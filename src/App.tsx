@@ -21,6 +21,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
+        <Header />
         <Container>
           <Guard>
             <RouterProvider router={router} />
