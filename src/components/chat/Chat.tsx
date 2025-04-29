@@ -9,13 +9,23 @@ import {
   InputBase,
   Paper,
   Stack,
+  styled,
   Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useCreateMessage } from "../../hooks/useCreateMessage";
 import { useEffect, useRef, useState } from "react";
 import { useGetMessages } from "../../hooks/useGetMessages";
-
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
 const Chat = () => {
   const params = useParams();
   const [message, setMessage] = useState("");
@@ -45,12 +55,14 @@ const Chat = () => {
     <Stack sx={{ height: "100%", justifyContent: "space-between" }}>
       <h1>{data?.chat.name}</h1>
       <Box sx={{ maxHeight: "70vh", overflow: "auto" }}>
-        {messages?.messages.map((message) => (
+        {messages?.messages.map((message:any) => (
           <Grid container alignItems="center" marginBottom="1rem">
-            <Grid item xs={3} md={1}>
+            <Grid size= {{xs:3, md:2}}>
+            <Item></Item>
               <Avatar src="" sx={{ width: 52, height: 52 }} />
             </Grid>
-            <Grid item xs={9} md={11}>
+            <Grid size = {{xs:9, md:11}}>
+            <Item></Item>
               <Stack>
                 <Paper sx={{ width: "fit-content" }}>
                   <Typography sx={{ padding: "0.9rem" }}>

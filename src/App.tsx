@@ -2,8 +2,10 @@ import {
   Container,
   CssBaseline,
   Grid,
+  Paper,
   ThemeProvider,
   createTheme,
+  styled,
 } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import router from "./components/Routes";
@@ -20,6 +22,16 @@ const darkTheme = createTheme({
     mode: "dark",
   },
 });
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
 
 const App = () => {
   const { path } = usePath();
@@ -32,12 +44,15 @@ const App = () => {
         <CssBaseline />
         <Header />
         <Guard>
+          <Container maxWidth="xl" sx={{ marginTop: "1rem" }}>
           {showChatList ? (
-            <Grid container>
-              <Grid size={{  md: 3 }}>
+            <Grid container spacing={5}>
+              <Grid size={{ xs:12, md:5, lg:4 ,xl:3 }}>
+              <Item></Item>
               <ChatList />
               </Grid>
-              <Grid size={{  md: 9 }}>
+              <Grid size={{  md:7, lg:8 ,xl:9 }}>
+              <Item></Item>
               <Routes />
               </Grid>
               
@@ -45,6 +60,7 @@ const App = () => {
           ) : (
             <Routes />
           )}
+          </Container>
         </Guard>
         <Snackbar />
       </ThemeProvider>
@@ -54,9 +70,9 @@ const App = () => {
 
 const Routes = () => {
   return (
-    <Container sx={{ height: "100%" }}>
+   
       <RouterProvider router={router} />
-    </Container>
+    
   );
 };
 
