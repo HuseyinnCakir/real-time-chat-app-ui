@@ -31,7 +31,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const chatId = params._id!;
   const { data } = useGetChat({ _id: chatId });
-  const [createMessage] = useCreateMessage(chatId);
+  const [createMessage] = useCreateMessage();
   const { data: messages } = useGetMessages({ chatId });
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
@@ -50,6 +50,7 @@ const Chat = () => {
     setMessage("");
     scrollToBottom();
   };
+
 
   return (
     <Stack sx={{ height: "100%", justifyContent: "space-between" }}>
